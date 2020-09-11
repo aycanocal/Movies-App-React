@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 
 import "./App.css";
+import Table from "react-bootstrap/Table";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
 
 const API_KEY = "79b40ce";
 
@@ -54,15 +57,20 @@ function App() {
 
   return (
     <div>
-      <input
+      <h1> Movies App </h1>
+      <h2> Search movies with their title!</h2>
+
+      <Form.Control
+        size="sm"
+        type="text"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
         placeholder="Search By Title"
         onKeyPress={searchByTitle}
-      ></input>
+      ></Form.Control>
 
       {typeof data != "undefined" ? (
-        <table>
+        <Table striped bordered hover size="sm">
           <thead>
             <tr>
               <th>Title</th>
@@ -79,18 +87,18 @@ function App() {
               </tr>
             </tbody>
           ))}
-        </table>
+        </Table>
       ) : (
         ""
       )}
 
       <div>
-        <button id="previous" onClick={handleClick}>
+        <Button variant="secondary" id="previous" onClick={handleClick}>
           Previous
-        </button>
-        <button id="next" onClick={handleClick}>
+        </Button>
+        <Button variant="primary" id="next" onClick={handleClick}>
           Next
-        </button>
+        </Button>
       </div>
     </div>
   );
