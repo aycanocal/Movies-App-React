@@ -4,6 +4,8 @@ import "./App.css";
 import Table from "react-bootstrap/Table";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import { BrowserRouter as Router, Link, Route } from "react-router-dom";
+import MovieDetails from "./components/MovieDetails";
 
 const API_KEY = "79b40ce";
 
@@ -56,51 +58,74 @@ function App() {
   };
 
   return (
-    <div>
-      <h1> Movies App </h1>
-      <h2> Search movies with their title!</h2>
-
-      <Form.Control
-        size="sm"
-        type="text"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        placeholder="Search By Title"
-        onKeyPress={searchByTitle}
-      ></Form.Control>
-
-      {typeof data != "undefined" ? (
-        <Table striped bordered hover size="sm">
-          <thead>
-            <tr>
-              <th>Title</th>
-              <th>Year</th>
-              <th>Imdb ID</th>
-            </tr>
-          </thead>
-          {data.map((movie) => (
-            <tbody key={movie.imdbID}>
-              <tr>
-                <td>{movie.Title}</td>
-                <td>{movie.Year}</td>
-                <td>{movie.imdbID}</td>
-              </tr>
-            </tbody>
-          ))}
-        </Table>
-      ) : (
-        ""
-      )}
-
+    <Router>
       <div>
-        <Button variant="secondary" id="previous" onClick={handleClick}>
-          Previous
-        </Button>
-        <Button variant="primary" id="next" onClick={handleClick}>
-          Next
-        </Button>
+        <Route
+          path="/"
+          exact
+          render={() => {
+            return (
+              <div>
+                <h1> Movies App </h1>
+                <h2> Search movies with their title!</h2>
+                <Form.Control
+                  size="sm"
+                  type="text"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                  placeholder="Search By Title"
+                  onKeyPress={searchByTitle}
+                ></Form.Control>
+                {typeof data != "undefined" ? (
+                  <Table striped bordered hover size="sm">
+                    <thead>
+                      <tr>
+                        <th>Title</th>
+                        <th>Year</th>
+                        <th>Imdb ID</th>
+                      </tr>
+                    </thead>
+                    {data.map((movie) => (
+                      <tbody key={movie.imdbID}>
+                        <tr>
+                          <td>
+                            <Link to="/movieDetails">{movie.Title}</Link>
+                          </td>
+                          <td>{movie.Year}</td>
+                          <td>{movie.imdbID}</td>
+                        </tr>
+                      </tbody>
+                    ))}
+                  </Table>
+                ) : (
+                  ""
+                )}
+                <div>
+                  <Button
+                    variant="secondary"
+                    id="previous"
+                    onClick={handleClick}
+                  >
+                    Previous
+                  </Button>
+                  <Button variant="primary" id="next" onClick={handleClick}>
+                    Next
+                  </Button>
+                </div>{" "}
+              </div>
+            );
+          }}
+        />
+
+        <Route
+          path="/movieDetails"
+          exact
+          render={() => {
+            return <MovieDetails title={title} />;
+          }}
+        />
       </div>
-    </div>
+    </Router>
   );
 }
 
