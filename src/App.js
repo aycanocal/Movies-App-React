@@ -15,7 +15,6 @@ function App() {
   const [pageQuery, setPageQuery] = useState("");
   const [totalResults, setTotalResults] = useState(10);
   var [page, setPage] = useState(1);
-  const [movieTitle, setMovieTitle] = useState("");
 
   useEffect(() => {
     fetch(`http://www.omdbapi.com/?s=${query}&apikey=${API_KEY}&page=${page}`)
@@ -100,10 +99,7 @@ function App() {
                       <tbody key={movie.imdbID}>
                         <tr>
                           <td>
-                            <Link
-                              to="/movieDetails"
-                              onClick={() => setMovieTitle(movie.Title)}
-                            >
+                            <Link to={`/movieDetails/${movie.Title}`}>
                               {movie.Title}
                             </Link>
                           </td>
@@ -134,15 +130,9 @@ function App() {
         />
 
         <Route
-          path="/movieDetails"
+          path="/movieDetails/:movieTitle"
           exact
-          render={() => {
-            return (
-              <div>
-                <MovieDetails movieTitle={movieTitle} />
-              </div>
-            );
-          }}
+          component={MovieDetails}
         />
       </div>
     </Router>

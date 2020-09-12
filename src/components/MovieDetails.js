@@ -2,16 +2,19 @@ import React, { useState, useEffect } from "react";
 
 const API_KEY = "79b40ce";
 
-function MovieDetails({ movieTitle }) {
+function MovieDetails({ match }) {
   const [data, setData] = useState({});
 
   useEffect(() => {
-    fetch(`http://www.omdbapi.com/?t=${movieTitle}&apikey=${API_KEY}`)
+    fetch(
+      `http://www.omdbapi.com/?t=${match.params.movieTitle}&apikey=${API_KEY}`
+    )
       .then((response) => response.json())
       .then((result) => {
         setData(result);
       });
   }, []);
+
   return (
     <div>
       <h2>Movie Details</h2>
