@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import Table from "react-bootstrap/Table";
 import { Link } from "react-router-dom";
 
 function DataTable({ data }) {
-  const [movieTitle, setMovieTitle] = useState("");
   return (
     <div>
       {typeof data != "undefined" ? (
