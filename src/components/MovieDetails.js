@@ -1,13 +1,10 @@
 import React from "react";
 
-function MovieDetails(props) {
-  const { title } = props;
-  console.log(title);
-
+function MovieDetails({ movieTitle }) {
   return (
     <div>
       <h2>Movie Details</h2>
-      <h2>{title}</h2>
+      <h3>{movieTitle}</h3>
     </div>
   );
 }
