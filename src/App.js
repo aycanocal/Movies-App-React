@@ -6,6 +6,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { BrowserRouter as Router, Link, Route } from "react-router-dom";
 import MovieDetails from "./components/MovieDetails";
+import DataTable from "./components/DataTable";
 
 const API_KEY = "79b40ce";
 
@@ -85,33 +86,7 @@ function App() {
                   placeholder="Search By Title"
                   onKeyPress={searchByTitle}
                 ></Form.Control>
-                {typeof data != "undefined" ? (
-                  <Table striped bordered hover size="sm">
-                    <thead>
-                      <tr>
-                        <th>Title</th>
-                        <th>Year</th>
-                        <th>Imdb ID</th>
-                      </tr>
-                    </thead>
-
-                    {data.map((movie) => (
-                      <tbody key={movie.imdbID}>
-                        <tr>
-                          <td>
-                            <Link to={`/movieDetails/${movie.Title}`}>
-                              {movie.Title}
-                            </Link>
-                          </td>
-                          <td>{movie.Year}</td>
-                          <td>{movie.imdbID}</td>
-                        </tr>
-                      </tbody>
-                    ))}
-                  </Table>
-                ) : (
-                  ""
-                )}
+                <DataTable data={data} />
                 <div>
                   <Button
                     variant="secondary"
