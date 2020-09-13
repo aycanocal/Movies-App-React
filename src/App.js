@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
-
-import "./App.css";
-
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
 import { BrowserRouter as Router, Route } from "react-router-dom";
+
 import MovieDetails from "./components/MovieDetails";
 import DataTable from "./components/DataTable";
-import Col from "react-bootstrap/Form";
+import PageButtons from "./components/PageButtons";
 
+import "./App.css";
+import Col from "react-bootstrap/Form";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import Dropdown from "react-bootstrap/Dropdown";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
 
 const API_KEY = "79b40ce";
 
@@ -20,12 +20,8 @@ function App() {
   const [year, setYear] = useState("");
   const [pageQuery, setPageQuery] = useState("");
   const [totalResults, setTotalResults] = useState(10);
+  const [type, setType] = useState("movie");
   var [page, setPage] = useState(1);
-  const [type, setType] = useState("Select Type");
-
-  const handleSelect = (e) => {
-    setType(e);
-  };
 
   useEffect(() => {
     fetch(`http://www.omdbapi.com/?s=${query}&apikey=${API_KEY}&page=${page}`)
@@ -43,7 +39,7 @@ function App() {
       setPage(++page);
       console.log(page);
       fetch(
-        `http://www.omdbapi.com/?s=${pageQuery}&t=${type}&y=${year}&apikey=${API_KEY}&page=${page}`
+        `http://www.omdbapi.com/?s=${pageQuery}&type=${type}&y=${year}&apikey=${API_KEY}&page=${page}`
       )
         .then((response) => response.json())
         .then((result) => {
@@ -54,7 +50,7 @@ function App() {
       setPage(--page);
       console.log(page);
       fetch(
-        `http://www.omdbapi.com/?s=${pageQuery}&t=${type}&y=${year}&apikey=${API_KEY}&page=${page}`
+        `http://www.omdbapi.com/?s=${pageQuery}&type=${type}&y=${year}&apikey=${API_KEY}&page=${page}`
       )
         .then((response) => response.json())
         .then((result) => {
@@ -68,7 +64,7 @@ function App() {
     setPage(1);
 
     fetch(
-      `http://www.omdbapi.com/?s=${query}&t=${type}&y=${year}&apikey=${API_KEY}&page=${page}`
+      `http://www.omdbapi.com/?s=${query}&type=${type}&y=${year}&apikey=${API_KEY}&page=${page}`
     )
       .then((response) => response.json())
       .then((result) => {
@@ -88,11 +84,19 @@ function App() {
           render={() => {
             return (
               <div>
-                <h1> Movies App </h1>
-                <h2> Search movies with their title!</h2>
+                <div className="header">
+                  <h1> Movies App </h1>
+                  <h6>
+                    Search your favourite movies! Click to the titles to see
+                    more!
+                  </h6>
+                </div>
 
-                <Form.Row>
-                  <Col>
+                <Form.Row
+                  className="justify-content-center"
+                  style={{ padding: "10px" }}
+                >
+                  <Col style={{ padding: "5px" }}>
                     <Form.Control
                       size="sm"
                       type="text"
@@ -101,7 +105,7 @@ function App() {
                       placeholder="Enter Title"
                     ></Form.Control>
                   </Col>
-                  <Col>
+                  <Col style={{ padding: "5px" }}>
                     <Form.Control
                       size="sm"
                       type="text"
@@ -110,22 +114,22 @@ function App() {
                       placeholder="Enter Year"
                     ></Form.Control>
                   </Col>
-                  <Col>
+                  <Col style={{ padding: "5px" }}>
                     <DropdownButton
                       alignRight
                       title={type}
                       id="dropdown-menu-align-right"
-                      onSelect={handleSelect}
+                      onSelect={(e) => {
+                        setType(e);
+                      }}
                       size="sm"
                     >
-                      <Dropdown.Item eventKey="Movie">Movie</Dropdown.Item>
-                      <Dropdown.Item eventKey="Serie">Serie</Dropdown.Item>
-                      <Dropdown.Item eventKey="Serie Episode">
-                        Serie Episode
-                      </Dropdown.Item>
+                      <Dropdown.Item eventKey="movie">Movie</Dropdown.Item>
+                      <Dropdown.Item eventKey="series">Series</Dropdown.Item>
+                      <Dropdown.Item eventKey="episode">Episode</Dropdown.Item>
                     </DropdownButton>
                   </Col>
-                  <Col>
+                  <Col style={{ padding: "5px" }}>
                     <Button
                       type="submit"
                       variant="primary"
@@ -136,20 +140,8 @@ function App() {
                     </Button>
                   </Col>
                 </Form.Row>
-
                 <DataTable data={data} />
-                <div>
-                  <Button
-                    variant="secondary"
-                    id="previous"
-                    onClick={handleClick}
-                  >
-                    Previous
-                  </Button>
-                  <Button variant="primary" id="next" onClick={handleClick}>
-                    Next
-                  </Button>
-                </div>
+                <PageButtons handleClick={handleClick} />
               </div>
             );
           }}

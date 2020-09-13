@@ -17,36 +17,38 @@ function MovieDetails({ match }) {
 
   return (
     <div>
-      <h2>Movie Details</h2>
       {typeof data != "undefined" ? (
-        <div>
-          <dl key={data.imdbID}>
+        <div className="details">
+          <div className="header">
+            <h3>{data.Title}</h3>
             <img src={data.Poster}></img>
-            <dt>Title:</dt>
-            <dd>{data.Title}</dd>
-            <dt>Rated:</dt>
+          </div>
+          <dl key={data.imdbID}>
+            <dt>Year</dt>
+            <dd> {data.Year}</dd>
+            <dt>Rated</dt>
             <dd> {data.Rated}</dd>
-            <dt>Released:</dt>
+            <dt>Released</dt>
             <dd>{data.Released}</dd>
-            <dt>Runtime:</dt>
+            <dt>Runtime</dt>
             <dd>{data.Runtime}</dd>
-            <dt>Genre:</dt>
+            <dt>Genre</dt>
             <dd>{data.Genre}</dd>
-            <dt>Director:</dt>
+            <dt>Director</dt>
             <dd>{data.Director}</dd>
-            <dt>Writer:</dt>
+            <dt>Writer</dt>
             <dd>{data.Writer}</dd>
-            <dt>Actors:</dt>
+            <dt>Actors</dt>
             <dd>{data.Actors}</dd>
-            <dt>Plot:</dt>
+            <dt>Plot</dt>
             <dd>{data.Plot}</dd>
-            <dt>Language:</dt>
+            <dt>Language</dt>
             <dd>{data.Language}</dd>
-            <dt>Country:</dt>
+            <dt>Country</dt>
             <dd>{data.Country}</dd>
-            <dt>Awards:</dt>
+            <dt>Awards</dt>
             <dd>{data.Awards}</dd>
-            <dt>IMDB Rating:</dt>
+            <dt>IMDB Rating</dt>
             <dd>{data.imdbRating}</dd>
           </dl>
         </div>

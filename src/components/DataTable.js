@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 function DataTable({ data }) {
   return (
-    <div>
+    <div className="datatable">
       {typeof data != "undefined" ? (
         <Table striped bordered hover size="sm">
           <thead>
