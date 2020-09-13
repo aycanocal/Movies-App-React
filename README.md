@@ -22,11 +22,12 @@ In the project directory run:
 
 `npm start`
 
-On your browser, open http://localhost:3000
+On your browser, open: http://localhost:3000
 
 ## Screenshots
 
-[Image](https://user-images.githubusercontent.com/39797208/93008478-ca2ec000-f57d-11ea-9acc-a705b161e9bf.png)
+![HomePage](https://user-images.githubusercontent.com/39797208/93008629-7c1abc00-f57f-11ea-9519-db981d9775e5.png)
 
-[Image](https://user-images.githubusercontent.com/39797208/93008480-cb5fed00-f57d-11ea-8f21-5b4f723c651e.png)
+![DetailsPage](https://user-images.githubusercontent.com/39797208/93008631-7cb35280-f57f-11ea-84ab-51cb9ea1667d.png)
+
 
