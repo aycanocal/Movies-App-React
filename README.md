@@ -4,7 +4,7 @@ An app to search and list movies and series by their title and year.
 
 ## Technologies Used
 
-OMDB API, JavaScript, React, React-Bootstrap, React-Hooks
+The Open Movie Database (OMDB) API, HTML, CSS, JavaScript, React, React-Bootstrap, React-Hooks
 
 ## Install Application
 
