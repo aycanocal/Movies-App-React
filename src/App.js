@@ -126,7 +126,6 @@ function App() {
                     >
                       <Dropdown.Item eventKey="movie">Movie</Dropdown.Item>
                       <Dropdown.Item eventKey="series">Series</Dropdown.Item>
-                      <Dropdown.Item eventKey="episode">Episode</Dropdown.Item>
                     </DropdownButton>
                   </Col>
                   <Col style={{ padding: "5px" }}>
